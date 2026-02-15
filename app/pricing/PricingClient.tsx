@@ -1,7 +1,7 @@
 "use client";
 
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import { CheckCircle2, Info, Headset, ArrowRight } from "lucide-react";
+import { CheckCircle2, Info, Headset } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -57,12 +57,12 @@ const tiers = [
 
 export default function PricingClient() {
   return (
-    <div className="font-sans bg-white dark:bg-zinc-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col selection:bg-primary/20">
+    <div className="font-sans bg-white dark:bg-zinc-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col selection:bg-secondary/20">
       <main className="flex-grow flex flex-col items-center justify-center py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Abstract Background Pattern */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-3xl"></div>
         </div>
 
         {/* Header Section */}
@@ -94,7 +94,7 @@ export default function PricingClient() {
             <div className="relative group px-8 py-2.5 rounded-full text-sm font-bold text-slate-400 dark:text-zinc-600 cursor-not-allowed flex items-center gap-2">
               Monthly
               <Info size={14} className="opacity-50" />
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-32 px-3 py-2 bg-slate-900 text-white text-[10px] rounded-xl text-center shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none font-black">
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-32 px-3 py-2 bg-slate-900 text-white text-[10px] rounded-xl text-center shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none font-black translate-y-2 group-hover:translate-y-0 duration-300">
                 Coming Soon
                 <div className="absolute top-full left-1/2 -translate-x-1/2 border-[6px] border-transparent border-t-slate-900"></div>
               </div>
@@ -112,10 +112,10 @@ export default function PricingClient() {
               className="h-full"
             >
               <div
-                className={`relative h-full flex flex-col p-8 rounded-3xl transition-all duration-500 hover:scale-[1.02] border
+                className={`relative h-full flex flex-col p-8 rounded-[2.5rem] transition-all duration-500 hover:scale-[1.02] border
                 ${
                   tier.highlight
-                    ? "bg-slate-50 dark:bg-zinc-900 border-primary/20 dark:border-primary/40 shadow-2xl scale-105 z-10"
+                    ? "bg-slate-50 dark:bg-zinc-900 border-secondary/20 dark:border-secondary/40 shadow-2xl scale-105 z-10"
                     : "bg-white dark:bg-zinc-950 border-gray-200 dark:border-zinc-800 hover:shadow-xl"
                 }
               `}
@@ -130,7 +130,7 @@ export default function PricingClient() {
 
                 <div className="mb-6">
                   <h3
-                    className={`text-xl font-black tracking-tight ${tier.highlight ? "text-primary" : "text-slate-900 dark:text-white"}`}
+                    className={`text-xl font-black tracking-tight ${tier.highlight ? "text-secondary" : "text-slate-900 dark:text-white"}`}
                   >
                     {tier.name}
                   </h3>
@@ -139,7 +139,7 @@ export default function PricingClient() {
                   </p>
                 </div>
 
-                <div className="mb-8 p-6 rounded-2xl bg-white/50 dark:bg-black/20 border border-slate-100 dark:border-zinc-800">
+                <div className="mb-8 p-6 rounded-3xl bg-white/50 dark:bg-black/20 border border-slate-100 dark:border-zinc-800">
                   <div className="flex items-baseline">
                     <span className="text-sm font-black text-slate-400 dark:text-zinc-600 mr-1.5">
                       LKR
@@ -159,11 +159,15 @@ export default function PricingClient() {
                   className={`block w-full py-4 text-center font-black rounded-2xl transition-all duration-300 active:scale-[0.98] mb-8
                     ${
                       tier.highlight
-                        ? "bg-primary text-white shadow-xl shadow-primary/20 hover:bg-primary/90"
-                        : "bg-transparent border-2 border-primary/20 text-primary hover:bg-primary hover:text-white hover:border-primary"
+                        ? "bg-secondary text-white shadow-xl shadow-secondary/20 hover:bg-secondary/90"
+                        : "bg-transparent border-2 border-secondary/20 text-secondary hover:bg-secondary hover:text-white hover:border-secondary"
                     }
                   `}
-                  href="/get-started"
+                  href={
+                    tier.name === "Vexel Enterprise"
+                      ? "/contact"
+                      : "/get-started"
+                  }
                 >
                   {tier.cta}
                 </Link>
@@ -195,7 +199,7 @@ export default function PricingClient() {
 
         {/* Trust Footer */}
         <MotionWrapper type="slideUp" delay={0.8} className="mt-20 text-center">
-          <div className="inline-flex flex-col md:flex-row items-center justify-center gap-6 bg-slate-50 dark:bg-zinc-900/50 px-10 py-6 rounded-3xl border border-slate-100 dark:border-zinc-800 shadow-xl">
+          <div className="inline-flex flex-col md:flex-row items-center justify-center gap-6 bg-slate-50 dark:bg-zinc-900/50 px-10 py-6 rounded-[2rem] border border-slate-100 dark:border-zinc-800 shadow-xl">
             <div className="flex -space-x-3">
               {[1, 2, 3].map((i) => (
                 <div
@@ -210,7 +214,7 @@ export default function PricingClient() {
                   />
                 </div>
               ))}
-              <div className="h-10 w-10 rounded-full ring-4 ring-white dark:ring-zinc-900 bg-primary/10 flex items-center justify-center text-[10px] font-black text-primary border border-primary/20">
+              <div className="h-10 w-10 rounded-full ring-4 ring-white dark:ring-zinc-900 bg-secondary/10 flex items-center justify-center text-[10px] font-black text-secondary border border-secondary/20">
                 +500
               </div>
             </div>
@@ -223,7 +227,7 @@ export default function PricingClient() {
               <span className="hidden md:inline mx-4 text-slate-200 dark:text-zinc-800">
                 |
               </span>
-              <span className="block md:inline mt-2 md:mt-0 text-primary font-black flex items-center justify-center md:justify-start gap-2">
+              <span className="block md:inline mt-2 md:mt-0 text-secondary font-black flex items-center justify-center md:justify-start gap-2">
                 <Headset size={16} />
                 24/7 Local Support
               </span>

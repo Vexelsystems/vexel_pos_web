@@ -16,7 +16,7 @@ import {
   Code,
   HelpCircle,
 } from "lucide-react";
-import { toast } from "sonner";
+import { showSuccess, showError } from "@/lib/toast-utils";
 
 /**
  * CONSULTATION CLIENT COMPONENT
@@ -56,14 +56,10 @@ export default function ConsultationClient() {
 
     // Custom validation logic
     if (!formData.email && !formData.phone) {
-      const errorAudio = new Audio("/sounds/error.mp3");
-      errorAudio.volume = 0.5;
-      errorAudio.play().catch(() => {});
-
-      toast.error("Contact Info Missing", {
-        description:
-          "Please provide either an email address or phone number so we can reach you.",
-      });
+      showError(
+        "Contact Info Missing",
+        "Please provide either an email address or phone number so we can reach you.",
+      );
       return;
     }
 
@@ -118,9 +114,7 @@ export default function ConsultationClient() {
       });
     } catch (error) {
       console.error("Error saving consultation:", error);
-      toast.error("Something went wrong", {
-        description: "Please try again later.",
-      });
+      showError("Something went wrong", "Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -397,18 +391,6 @@ export default function ConsultationClient() {
           </div>
         </div>
       )}
-
-      <style jsx global>{`
-        .background-animate {
-          background-size: 200% auto;
-          animation: shine 4s linear infinite;
-        }
-        @keyframes shine {
-          to {
-            background-position: 200% center;
-          }
-        }
-      `}</style>
     </div>
   );
 }

@@ -1,5 +1,3 @@
-import { services } from "@/lib/services";
-
 /**
  * NAVIGATION CONFIGURATION
  *
@@ -17,10 +15,6 @@ const formatSlug = (slug: string) => {
 };
 
 export const navigation = {
-  services: services.map((service: { slug: string }) => ({
-    name: formatSlug(service.slug),
-    href: `/services/${service.slug}`,
-  })),
   products: [
     { name: "Vexel POS", href: "/products/vexel-pos" },
     { name: "Vexel Track", href: "/products/vexel-track" },

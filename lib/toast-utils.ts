@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 
-const playSound = (type: "success" | "error" | "info") => {
+export const playSound = (type: "success" | "error" | "info") => {
   try {
     const audio = new Audio(
       type === "error" ? "/sounds/error.mp3" : "/sounds/notification.wav",

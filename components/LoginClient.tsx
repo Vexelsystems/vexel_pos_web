@@ -5,7 +5,7 @@ import { Mail, Lock, LogIn, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { companyDetails } from "@/lib/companydetails";
 import Link from "next/link";
-import { toast } from "sonner";
+import { playSound } from "@/lib/toast-utils";
 
 /**
  * LOGIN CLIENT COMPONENT
@@ -59,9 +59,7 @@ export default function LoginClient() {
     setProgress(100);
     setIsLoading(false);
 
-    const audio = new Audio("/sounds/error.mp3");
-    audio.volume = 0.5;
-    audio.play().catch(() => {});
+    playSound("error");
 
     setShowError(true);
   };

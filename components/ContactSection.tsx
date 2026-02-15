@@ -10,7 +10,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { companyDetails } from "@/lib/companydetails";
-import { toast } from "sonner";
+import { showSuccess, showError } from "@/lib/toast-utils";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
 
 export function ContactSection() {
@@ -24,12 +24,7 @@ export function ContactSection() {
     const form = e.currentTarget;
 
     if (!form.checkValidity()) {
-      const audio = new Audio("/sounds/error.mp3");
-      audio.volume = 0.5;
-      audio.play().catch(() => {});
-      toast.error("Form incomplete", {
-        description: "Please fill in all required fields.",
-      });
+      showError("Form incomplete", "Please fill in all required fields.");
       return;
     }
 
@@ -44,9 +39,10 @@ export function ContactSection() {
 
       console.log("Mock submission success:", data);
 
-      const audio = new Audio("/sounds/notification.wav");
-      audio.volume = 0.5;
-      audio.play().catch(() => {});
+      showSuccess(
+        "Message Received!",
+        "Thank you for reaching out. We will get back to you shortly.",
+      );
 
       setShowSuccessModal(true);
       form.reset();
@@ -56,10 +52,7 @@ export function ContactSection() {
         error?.message || "Connection failed. Please check your internet.";
       setSubmitError(errorMessage);
 
-      toast.error("Submission Failed", {
-        description: errorMessage,
-        duration: 5000,
-      });
+      showError("Submission Failed", errorMessage);
     } finally {
       setIsSubmitting(false);
     }
