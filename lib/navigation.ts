@@ -4,7 +4,7 @@
  * Functional Overview:
  * - Centralizes all menu links (header/footer/mobile).
  * - Logic: Auto-generates Service links dynamically from `services.ts`.
- * - formatSlug: Helper to beautify URL slugs for display.
+ * - formatSlug: Helper to beautify URL slugs for display.dfdfsas
  */
 // Helper to format slug to title (e.g., "web-development" -> "Web Development")
 const formatSlug = (slug: string) => {
