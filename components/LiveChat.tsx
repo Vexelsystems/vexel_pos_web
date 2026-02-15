@@ -12,7 +12,7 @@ import {
   HelpCircle,
   Phone,
 } from "lucide-react";
-import { toast } from "sonner";
+import { showSuccess, showError } from "@/lib/toast-utils";
 import { companyDetails } from "@/lib/companydetails";
 
 /**
@@ -50,27 +50,12 @@ export default function LiveChat() {
     }
   }, []);
 
-  const playSuccessSound = () => {
-    const audio = new Audio("/sounds/notification.wav");
-    audio.volume = 0.5;
-    audio.play().catch((e) => console.error("Error playing success sound:", e));
-  };
-
-  const playErrorSound = () => {
-    const audio = new Audio("/sounds/error.mp3");
-    audio.volume = 0.5;
-    audio.play().catch((e) => console.error("Error playing error sound:", e));
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Manual Validation for Sounds
     if (!formData.name || !formData.email || !formData.message) {
-      toast.error("Please fill in all required fields", {
-        description: "Your name, email, and message are required.",
-      });
-      playErrorSound();
+      showError("Field missing", "Your name, email, and message are required.");
       return;
     }
 
@@ -108,10 +93,7 @@ ${formData.message}
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
     // Play success sound and show toast
-    playSuccessSound();
-    toast.success("Ready to send!", {
-      description: "We're redirecting you to WhatsApp now...",
-    });
+    showSuccess("Ready to send!", "We're redirecting you to WhatsApp now...");
 
     setIsOpen(false);
 
@@ -242,10 +224,10 @@ ${formData.message}
               type="submit"
               onClick={() => {
                 if (!formData.name || !formData.email || !formData.message) {
-                  playErrorSound();
-                  toast.error("Required fields missing", {
-                    description: "Please complete the form before sending.",
-                  });
+                  showError(
+                    "Required fields missing",
+                    "Please complete the form before sending.",
+                  );
                 }
               }}
               className="w-full bg-primary text-white py-4 rounded-xl font-bold hover:brightness-105 transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group mt-2"

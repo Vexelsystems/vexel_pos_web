@@ -146,7 +146,7 @@ export function generateLocalProductSchema({
     name,
     description,
     url: `${BASE_URL}${url}`,
-    image: image ? `${BASE_URL}${image}` : `${BASE_URL}/VLogo.png`,
+    image: image ? `${BASE_URL}${image}` : `${BASE_URL}/Vexcel Logo.png`,
     brand: {
       "@type": "Brand",
       name: companyDetails.name,

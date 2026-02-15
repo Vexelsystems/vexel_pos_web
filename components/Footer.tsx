@@ -82,7 +82,7 @@ export default function Footer() {
           {/* Column 1: Brand Identity (Always Visible) */}
           <div className="col-span-1 lg:col-span-1 flex flex-col gap-4 items-center md:items-start text-center md:text-left bg-foreground/5 p-6 rounded-3xl border border-primary/10 lg:border-none lg:bg-transparent lg:p-0">
             <Link href="/" className="flex items-center gap-2">
-              <div className="relative size-10 filter drop-shadow-[0_0_8px_rgba(0,119,237,0.5)]">
+              <div className="relative size-10 filter drop-shadow-[0_0_8px_rgba(147,51,234,0.5)]">
                 <Image
                   src={companyDetails.logos.main}
                   alt={`${companyDetails.name} Logo`}

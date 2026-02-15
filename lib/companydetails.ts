@@ -38,7 +38,7 @@ export const companyDetails = {
    * Update these paths if logo files are moved or renamed
    */
   logos: {
-    main: "/VLogo.png", // Primary logo file
+    main: "/Vexcel Logo.png", // Primary logo file
   },
 
   /**
@@ -46,7 +46,7 @@ export const companyDetails = {
    * Used for meta descriptions, about sections, and SEO
    */
   description:
-    "Vexel Systems is a modern technology company delivering innovative, scalable, and user-friendly digital solutions. We specialize in software development, AI-powered systems, IoT solutions, and modern web technologies to help businesses grow efficiently.",
+    "Powered by Vexel Systems, Vexel POS delivers innovative, reliable, and user-friendly solutions for modern businesses.",
 
   /**
    * MISSION & VISION

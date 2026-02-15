@@ -239,4 +239,15 @@ button:disabled,
   .animation-delay-4000 {
     animation-delay: 4s;
   }
+
+  /* Custom Shine Animation for Buttons/Borders */
+  .background-animate {
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
+  }
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
 }

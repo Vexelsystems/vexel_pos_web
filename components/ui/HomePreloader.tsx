@@ -60,10 +60,8 @@ export default function HomePreloader() {
               transition={{ duration: 0.5 }}
               className="relative size-24 md:size-32"
             >
-              {/* Assuming VLogo.png exists as generally referenced in SEO metadata */}
-              {/* If not, I'll use a text fallback or generic shape, but VLogo.png was referenced in layout.tsx */}
               <Image
-                src="/VLogo.png"
+                src="/Vexcel Logo.png"
                 alt="Vexel Systems"
                 fill
                 className="object-contain"

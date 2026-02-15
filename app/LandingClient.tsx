@@ -57,8 +57,10 @@ export default function LandingClient() {
             </h1>
 
             <p className="mt-8 text-xl md:text-2xl text-slate-500 dark:text-zinc-400 max-w-3xl mx-auto mb-16 font-bold leading-relaxed">
-              The all-in-one cloud POS platform designed for Sri Lankan retail
-              and hospitality. Simplify operations, track inventory in
+              Vexel is a{" "}
+              <span className="text-secondary">Sri Lanka-based company</span>{" "}
+              providing the all-in-one cloud POS platform designed for local
+              retail and hospitality. Simplify operations, track inventory in
               real-time, and grow effortlessly.
             </p>
 

@@ -1,17 +1,12 @@
 "use client";
 
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
-import {
-  MonitorDot,
-  Eye,
-  EyeOff,
-  ChevronDown,
-  CheckCircle2,
-} from "lucide-react";
+import { Eye, EyeOff, ChevronDown, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import { showSuccess } from "@/lib/toast-utils";
+import { companyDetails } from "@/lib/companydetails";
 
 export default function SignUpClient() {
   const [showPassword, setShowPassword] = useState(false);
@@ -39,10 +34,16 @@ export default function SignUpClient() {
         <div className="relative z-10">
           <Link
             href="/"
-            className="flex items-center space-x-2 text-white group"
+            className="flex items-center space-x-3 text-white group"
           >
-            <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/30 group-hover:scale-110 transition-transform">
-              <MonitorDot size={24} />
+            <div className="relative w-10 h-10 group-hover:scale-110 transition-transform">
+              <Image
+                src={companyDetails.logos.main}
+                alt={`${companyDetails.name} Logo`}
+                fill
+                className="object-contain filter brightness-0 invert"
+                sizes="40px"
+              />
             </div>
             <span className="text-2xl font-black tracking-tighter">
               Vexel<span className="italic opacity-80">Sys</span>
@@ -169,8 +170,9 @@ export default function SignUpClient() {
                       id="business-type"
                       name="business-type"
                       required
+                      defaultValue=""
                     >
-                      <option disabled selected value="">
+                      <option disabled value="">
                         Select type
                       </option>
                       <option value="retail">Retail Store</option>
