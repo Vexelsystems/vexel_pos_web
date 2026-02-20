@@ -14,6 +14,9 @@ import {
   Sparkles,
   Phone,
   ShieldCheck,
+  Edit2,
+  Check,
+  X,
 } from "lucide-react";
 import Loader from "@/components/Loader";
 
@@ -52,6 +55,8 @@ export function DashboardClient() {
   const [verifyingPhone, setVerifyingPhone] = useState(false);
   const [showPhoneOtpInput, setShowPhoneOtpInput] = useState(false);
   const [requestingPhoneOtp, setRequestingPhoneOtp] = useState(false);
+  const [isEditingPhone, setIsEditingPhone] = useState(false);
+  const [tempPhoneNumber, setTempPhoneNumber] = useState("");
 
   const handleLogout = async () => {
     logout();
@@ -155,6 +160,36 @@ export function DashboardClient() {
       toast.error(err.message || "Failed to verify. Please try again.");
     } finally {
       setVerifyingPhone(false);
+    }
+  };
+
+  const handleSavePhoneNumber = async () => {
+    if (!tempPhoneNumber || tempPhoneNumber.length < 10) {
+      toast.error("Please enter a valid phone number.");
+      return;
+    }
+
+    setSaving(true);
+    try {
+      const result = await api.put("/api/verify/phone-update", {
+        email: user?.email,
+        phoneNumber: tempPhoneNumber,
+      });
+
+      if (result.success) {
+        toast.success("Phone number updated!");
+        updateUser({
+          phoneNumber: tempPhoneNumber,
+          phoneVerified: false,
+        });
+        setIsEditingPhone(false);
+      } else {
+        toast.error(result.error || "Failed to update phone number.");
+      }
+    } catch (err: any) {
+      toast.error(err.message || "Something went wrong.");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -388,13 +423,54 @@ export function DashboardClient() {
 
                     {!showPhoneOtpInput ? (
                       <div className="flex items-center justify-between bg-white/50 dark:bg-black/20 p-4 rounded-2xl border border-white/10 backdrop-blur-sm">
-                        <div className="flex items-center gap-3">
-                          <div className="size-2 bg-primary rounded-full animate-pulse" />
-                          <span className="font-bold text-foreground/80">
-                            {user?.phoneNumber || "No number provided"}
-                          </span>
+                        <div className="flex-1 mr-4">
+                          {isEditingPhone ? (
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="text"
+                                value={tempPhoneNumber}
+                                onChange={(e) =>
+                                  setTempPhoneNumber(e.target.value)
+                                }
+                                placeholder="+94771234567"
+                                className="w-full bg-background border border-white/10 rounded-xl px-4 py-2 font-bold focus:ring-2 focus:ring-primary/20 outline-none"
+                              />
+                              <button
+                                onClick={handleSavePhoneNumber}
+                                className="p-2 bg-emerald-500 text-white rounded-xl hover:brightness-110 transition-all shadow-lg shadow-emerald-500/20"
+                              >
+                                <Check size={18} />
+                              </button>
+                              <button
+                                onClick={() => setIsEditingPhone(false)}
+                                className="p-2 bg-red-500 text-white rounded-xl hover:brightness-110 transition-all shadow-lg shadow-red-500/20"
+                              >
+                                <X size={18} />
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="flex items-center justify-between w-full">
+                              <div className="flex items-center gap-3">
+                                <div className="size-2 bg-primary rounded-full animate-pulse" />
+                                <span className="font-bold text-foreground/80">
+                                  {user?.phoneNumber || "No number provided"}
+                                </span>
+                              </div>
+                              <button
+                                onClick={() => {
+                                  setTempPhoneNumber(user?.phoneNumber || "");
+                                  setIsEditingPhone(true);
+                                }}
+                                className="p-2 text-foreground/40 hover:text-primary transition-colors"
+                                title="Edit Number"
+                              >
+                                <Edit2 size={16} />
+                              </button>
+                            </div>
+                          )}
                         </div>
-                        {user?.phoneNumber && (
+
+                        {!isEditingPhone && user?.phoneNumber && (
                           <button
                             onClick={handleRequestPhoneOtp}
                             disabled={requestingPhoneOtp}
