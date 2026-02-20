@@ -1,14 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Mail,
-  Phone,
-  Share,
-  MapPin,
-  CheckCircle2,
-  Loader2,
-} from "lucide-react";
+import { Mail, Phone, Share, MapPin, CheckCircle2 } from "lucide-react";
 import { companyDetails } from "@/lib/companydetails";
 import { showSuccess, showError } from "@/lib/toast-utils";
 import { MotionWrapper } from "@/components/ui/MotionWrapper";
@@ -20,6 +13,15 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    /**
+     * FORM SUBMISSION ENGINE
+     * Strategy: Async simulation with browser-native validation check.
+     * Logic:
+     * 1. 'form.checkValidity()' ensures HTML5 constraints (required, email type) are met before processing.
+     * 2. 'Object.fromEntries(formData.entries())' flattens the form for payload visualization.
+     * 3. 'setTimeout' simulates network latency to prevent instant UI jarring.
+     * 4. Error handling catches connectivity issues and displays localized feedback via toast.
+     */
     console.log("Submitting contact form..."); // Debug log
     const form = e.currentTarget;
 
@@ -208,7 +210,7 @@ export function ContactSection() {
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 size={20} className="animate-spin" />
+                      <div className="loader brightness-0 invert scale-50" />
                       Sending...
                     </>
                   ) : (

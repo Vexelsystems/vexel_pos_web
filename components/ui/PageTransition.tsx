@@ -18,6 +18,14 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
+        /**
+         * ROUTE-KEYED ORCHESTRATION
+         * Strategy: Dynamic keying for lifecycle management.
+         * Logic:
+         * 1. Next.js App Router keeps the layout stable but swaps children.
+         * 2. Using 'pathname' as the key forces Framer Motion to treat every navigation as a new entry/exit.
+         * 3. 'mode="wait"' ensures the old page exits BEFORE the new one enters to prevent layout flickering.
+         */
         key={pathname}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

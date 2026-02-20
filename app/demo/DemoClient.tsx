@@ -66,7 +66,7 @@ export default function DemoClient() {
               </Link>
               <Link
                 className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-lg shadow-primary/20"
-                href="/get-started"
+                href="/register"
               >
                 Get Started
               </Link>
@@ -210,6 +210,11 @@ export default function DemoClient() {
                         </div>
                       </div>
                       <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
+                        {/* 
+                           INTERACTIVE TOUR TRIGGER
+                           Strategy: Contextual CTA on hover.
+                           Logic: Only visible when user expresses intent by hovering over the "Laptop" mockup.
+                        */}
                         <button className="bg-white text-primary font-black py-4 px-8 rounded-xl shadow-2xl hover:scale-105 transition-transform flex items-center gap-2 active:scale-95">
                           Start Interactive Tour
                           <ArrowRight size={18} />
@@ -334,6 +339,11 @@ export default function DemoClient() {
                   />
                   <button
                     onClick={() => {
+                      /**
+                       * DEMO BOOKING LOGIC
+                       * Strategy: Direct user feedback (Toast-driven).
+                       * Logic: Mimics a submission event for prototyping purposes.
+                       */
                       showSuccess(
                         "Demo Request Received!",
                         "Our specialist will contact you shortly to confirm the appointment.",

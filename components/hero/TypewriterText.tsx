@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * TYPEWRITER TEXT COMPONENT
- * 
+ *
  * Performance:
  * - Client-side only to avoid hydration mismatches.
  * - Uses Framer Motion for smooth, hardware-accelerated animations.
@@ -19,7 +19,13 @@ const defaultPhrases = [
   "Drives Real ROI.",
 ];
 
-export function TypewriterText({ phrases = defaultPhrases, className = "" }: { phrases?: string[]; className?: string }) {
+export function TypewriterText({
+  phrases = defaultPhrases,
+  className = "",
+}: {
+  phrases?: string[];
+  className?: string;
+}) {
   const [index, setIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -28,7 +34,16 @@ export function TypewriterText({ phrases = defaultPhrases, className = "" }: { p
   useEffect(() => {
     const handleType = () => {
       const currentPhrase = phrases[index];
-      
+
+      /**
+       * TYPEWRITER STATE MACHINE
+       * Strategy: Recursive-ish time-slice execution.
+       * Logic:
+       * 1. 'Typing Phase': Increments 'displayText' length until it matches the full phrase.
+       * 2. 'Wait Phase': 2000ms delay after full phrase completion.
+       * 3. 'Deleting Phase': Decrements length at double speed (50ms) to clear the slot.
+       * 4. 'Switch Phase': Increments 'index' when empty to cycle to the next phrase.
+       */
       if (!isDeleting) {
         // Typing
         setDisplayText(currentPhrase.substring(0, displayText.length + 1));

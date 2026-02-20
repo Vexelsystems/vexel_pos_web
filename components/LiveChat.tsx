@@ -34,6 +34,14 @@ export default function LiveChat() {
   });
 
   // Pre-fill from localStorage if available
+  /**
+   * LEAD PERSISTENCE LOGIC
+   * Strategy: Read-on-mount from localStorage to improve UX.
+   * Logic:
+   * 1. Attempt to retrieve 'vexel_lead_info'.
+   * 2. If present, parse and update name/email state.
+   * 3. Wrapped in try-catch to prevent crash on malformed JSON.
+   */
   useEffect(() => {
     const saved = localStorage.getItem("vexel_lead_info");
     if (saved) {
@@ -69,6 +77,14 @@ export default function LiveChat() {
     );
 
     // Format WhatsApp Message
+    /**
+     * WHATSAPP MESSAGE LOGIC
+     * Strategy: Human-readable markdown for the recipient (Vexel Support).
+     * Logic:
+     * 1. Buffer string with visual dividers (━━━━━━━━━━━━━).
+     * 2. Use Bold (*) and Italic (_) for emphasis in the WA client.
+     * 3. Encode via encodeURIComponent to ensure special characters don't break the URL.
+     */
     const text = `━━━━━━━━━━━━━━━━━━━━
 🎯 *${formData.purpose.toUpperCase()}*
 ━━━━━━━━━━━━━━━━━━━━
@@ -86,7 +102,7 @@ ${formData.message}
 🌐 _Sent via Vexel Systems_`;
 
     const encodedText = encodeURIComponent(text);
-    // Use api.whatsapp.com for better cross-device reliability
+    // Use api.whatsapp.com for better cross-device reliability (handles web/mobile handoff better than wa.me).
     const phoneNumber = companyDetails.contact.whatsapp.replace(/[^0-9]/g, "");
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedText}`;
 

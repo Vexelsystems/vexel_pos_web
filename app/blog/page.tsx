@@ -1,6 +1,11 @@
 import { generatePageMetadata } from "@/lib/seo";
 import BlogClient from "./BlogClient";
 
+/**
+ * METADATA GENERATION
+ * Strategy: Content-driven SEO (Business Insights).
+ * Logic: Targets entrepreneurs seeking management advice in the local context.
+ */
 export async function generateMetadata() {
   return await generatePageMetadata({
     title: "Blog & Business Insights | Vexel POS",

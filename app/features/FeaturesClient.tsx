@@ -27,6 +27,15 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+/**
+ * FEATURES CLIENT COMPONENT
+ *
+ * Functional Overview:
+ * - Implements an immersive feature showcase using high-fidelity UI mockups.
+ * - Key Sections: Sales & Transactions (Mockup), Inventory (AI Forecast Mockup),
+ *   Employee Management (Performance Charts), and Reporting (SVG Data Visualization).
+ * - UI Strategy: Uses 'ring-8' borders and 'rounded-[2.5rem]' for a premium, heavy-set modern aesthetic.
+ */
 export default function FeaturesClient() {
   return (
     <div className="bg-white dark:bg-zinc-950 font-sans text-slate-900 dark:text-white antialiased selection:bg-primary/20">
@@ -128,6 +137,14 @@ export default function FeaturesClient() {
             </MotionWrapper>
 
             {/* Visual: POS UI Mockup */}
+            {/* 
+              VISUAL: POS UI MOCKUP LOGIC
+              - Strategy: High-fidelity CSS/HTML simulation of a POS terminal.
+              - Logic: 
+                1. Product Grid: Maps a static array to 'button-like' interactive elements.
+                2. Order Summary: Demonstrates the line-item logic and pricing summation.
+                3. Action Button: High-contrast primary CTA for 'Completing' a transaction.
+            */}
             <MotionWrapper
               type="slideLeft"
               className="order-1 lg:order-2 relative"
@@ -579,6 +596,14 @@ export default function FeaturesClient() {
                   </div>
                 </div>
                 {/* Chart Area */}
+                {/* 
+                  CHART AREA LOGIC (DATA VISUALIZATION)
+                  - Strategy: SVG Path Morphing / Drawing.
+                  - Logic: 
+                    1. Grid Lines: Static 20% intervals using an array map.
+                    2. Data Path: Quadratic Bezier curves (Q and T commands) to create smooth trend lines.
+                    3. AI Forecasting: Visualized via gradients and highlight markers (circles).
+                */}
                 <div className="flex-1 flex flex-col justify-end relative py-4">
                   <div className="absolute inset-0 flex flex-col justify-between py-4 pointer-events-none">
                     {[1, 2, 3, 4, 5].map((i) => (
@@ -746,7 +771,7 @@ export default function FeaturesClient() {
             <div className="flex flex-col sm:flex-row justify-center gap-6 items-center">
               <Link
                 className="inline-flex justify-center items-center px-12 py-5 rounded-[2.5rem] bg-primary hover:bg-primary/90 text-white font-black text-xl transition-all shadow-[0_20px_50px_rgba(19,91,236,0.3)] transform hover:scale-105 active:scale-95"
-                href="/get-started"
+                href="/register"
               >
                 Get Started Free
               </Link>
@@ -758,7 +783,7 @@ export default function FeaturesClient() {
               </Link>
             </div>
             <p className="mt-12 text-sm text-slate-500 font-black uppercase tracking-[0.3em]">
-              No credit card required. 14-day free trial.
+              No credit card required. Get started now.
             </p>
           </MotionWrapper>
         </div>

@@ -1,6 +1,11 @@
 import { generatePageMetadata } from "@/lib/seo";
 import DemoClient from "./DemoClient";
 
+/**
+ * METADATA GENERATION
+ * Strategy: Conversion-focused SEO (Interactive Tour).
+ * Logic: Targets high-intent users looking to "test" or "experience" the system.
+ */
 export async function generateMetadata() {
   return await generatePageMetadata({
     title: "Interactive Demo | Experience Vexel POS",

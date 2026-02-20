@@ -11,65 +11,9 @@ export default function ShowcaseClient() {
   return (
     <div className="font-sans bg-white text-foreground antialiased selection:bg-primary/20">
       {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex-shrink-0 flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-xl">
-                  V
-                </div>
-                <span className="font-bold text-xl tracking-tight text-gray-900">
-                  Vexel Systems
-                </span>
-              </Link>
-              <div className="hidden sm:ml-10 sm:flex sm:space-x-8">
-                <Link
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  href="/#solutions"
-                >
-                  Solutions
-                </Link>
-                <Link
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  href="/pricing"
-                >
-                  Pricing
-                </Link>
-                <Link
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  href="/about"
-                >
-                  About
-                </Link>
-                <Link
-                  className="border-primary text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  href="/contact"
-                >
-                  Contact
-                </Link>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <Link
-                className="text-sm font-medium text-gray-500 hover:text-gray-900 mr-4"
-                href="/login"
-              >
-                Log in
-              </Link>
-              <Link
-                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-sm transition-colors"
-                href="/get-started"
-              >
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 lg:pt-40 lg:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           {/* Left Column: Contact Details */}
           <MotionWrapper type="slideRight" duration={0.8}>
@@ -215,6 +159,14 @@ export default function ShowcaseClient() {
                 </p>
               </div>
               <form
+                /**
+                 * CONTACT FORM LOGIC
+                 * Strategy: Mock submission for UX validation.
+                 * Logic:
+                 * 1. Prevent default reload.
+                 * 2. Show success toast (using toast-utils).
+                 * 3. Reset form states to clear sensitivity.
+                 */
                 className="space-y-6"
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -361,6 +313,11 @@ export default function ShowcaseClient() {
             <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-2">
               <div className="relative w-full h-80 lg:h-96 rounded-xl overflow-hidden bg-gray-100 dark:bg-zinc-800">
                 <iframe
+                  /**
+                   * GOOGLE MAPS INTEGRATION
+                   * Strategy: Iframe-based embed for reliability.
+                   * Logic: Points to the static HQ location in Vavuniya (Vairavapuliyankulam).
+                   */
                   allowFullScreen
                   className="w-full h-full border-0"
                   loading="lazy"

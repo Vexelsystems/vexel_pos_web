@@ -20,6 +20,11 @@ export default function Breadcrumbs() {
   const pathname = usePathname();
 
   // Paths where breadcrumbs should be hidden
+  /**
+   * BREADCRUMB VISIBILITY LOGIC
+   * Strategy: Static exclusion list.
+   * Logic: Returns null for high-level landing pages to maintain a clean hero aesthetic.
+   */
   const hiddenPaths = ["/", "/login", "/consultation", "/quote", "/contact"];
 
   if (hiddenPaths.includes(pathname)) return null;
@@ -33,6 +38,13 @@ export default function Breadcrumbs() {
     const href = `/${segments.slice(0, index + 1).join("/")}`;
 
     // Format the label: replace hyphens with spaces and capitalize
+    /**
+     * SLUG TRANSFORMATION LOGIC
+     * Strategy: Regex-based title casing.
+     * Logic:
+     * 1. Replaces hyphens with spaces (e.g., 'web-dev' -> 'web dev').
+     * 2. Capitalizes the first letter of every word for professional UI display.
+     */
     const label = segment
       .replace(/-/g, " ")
       .replace(/\b\w/g, (char) => char.toUpperCase());

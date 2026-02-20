@@ -23,6 +23,9 @@ export function SoundToaster() {
       position="top-right"
       expand={true}
       richColors
+      icons={{
+        loading: <div className="loader scale-50" />,
+      }}
       toastOptions={{
         className: "sonner-toast-custom",
         style: {

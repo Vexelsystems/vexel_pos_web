@@ -4,18 +4,20 @@ import { MotionWrapper } from "@/components/ui/MotionWrapper";
 import { CheckCircle2, Info, Headset } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 const tiers = [
   {
     name: "Vexel Startup",
     description: "Best for small petti kade just starting out.",
-    price: "35,000",
+    monthlyPrice: "4,000",
+    yearlyPrice: "35,000",
     cta: "Start Basic",
     highlight: false,
     features: [
       "2 Users",
-      "Single Branch",
-      "1,000 Products",
+      "Single",
+      "1,000 Proucts",
       "Web POS",
       "Basic Reports",
     ],
@@ -23,7 +25,8 @@ const tiers = [
   {
     name: "Vexel Business",
     description: "Perfect for growing retail shops needing reliability.",
-    price: "65,000",
+    monthlyPrice: "6,000",
+    yearlyPrice: "65,000",
     cta: "Get Started",
     highlight: true,
     mostPopular: true,
@@ -37,28 +40,28 @@ const tiers = [
       "Priority Support",
     ],
   },
-  {
-    name: "Vexel Enterprise",
-    description: "Advanced control for chains and franchises.",
-    price: "120,000",
-    cta: "Contact Sales",
-    highlight: false,
-    features: [
-      "Everything in Business, plus:",
-      "Unlimited Users",
-      "2 Branches (Expandable)",
-      "Central Warehouse",
-      "Super Admin Mode",
-      "Dedicated Support",
-      "Custom Bill Formats",
-    ],
-  },
 ];
 
+/**
+ * PRICING CLIENT COMPONENT
+ *
+ * Functional Overview:
+ * - Renders the pricing grid with Monthly/Yearly billing cycle toggle.
+ * - Logic: Dynamically calculates savings percentage and absolute LKR savings for yearly billing.
+ * - UI: Uses highly visual cards with high-contrast highlighting for the 'Business' tier.
+ */
 export default function PricingClient() {
+  /**
+   * BILLING CYCLE STATE
+   * Controls whether monthly or yearly prices are displayed globally in the grid.
+   */
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
+    "monthly",
+  );
+
   return (
     <div className="font-sans bg-white dark:bg-zinc-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col selection:bg-secondary/20">
-      <main className="flex-grow flex flex-col items-center justify-center py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <main className="flex-grow flex flex-col items-center justify-center pt-32 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Abstract Background Pattern */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
           <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-3xl"></div>
@@ -85,116 +88,178 @@ export default function PricingClient() {
           className="flex justify-center mb-16"
         >
           <div className="bg-slate-100 dark:bg-zinc-900 p-1.5 rounded-full inline-flex items-center relative">
-            <button className="relative px-8 py-2.5 rounded-full text-sm font-black bg-white dark:bg-zinc-800 text-slate-900 dark:text-white shadow-xl transition-all duration-300 z-10">
+            <button
+              onClick={() => setBillingCycle("monthly")}
+              className={`relative px-8 py-2.5 rounded-full text-sm font-bold transition-all duration-300 z-10 ${
+                billingCycle === "monthly"
+                  ? "bg-white dark:bg-zinc-800 text-slate-900 dark:text-white shadow-xl"
+                  : "text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white"
+              }`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setBillingCycle("yearly")}
+              className={`relative px-8 py-2.5 rounded-full text-sm font-black transition-all duration-300 z-10 ${
+                billingCycle === "yearly"
+                  ? "bg-white dark:bg-zinc-800 text-slate-900 dark:text-white shadow-xl"
+                  : "text-slate-500 dark:text-zinc-500 hover:text-slate-900 dark:hover:text-white"
+              }`}
+            >
               Billed Yearly
               <span className="absolute -top-3 -right-3 bg-green-500 text-white text-[10px] px-2.5 py-1 rounded-full font-black shadow-lg border-2 border-white dark:border-zinc-800">
-                Save 20%
+                Save up to 33%
               </span>
             </button>
-            <div className="relative group px-8 py-2.5 rounded-full text-sm font-bold text-slate-400 dark:text-zinc-600 cursor-not-allowed flex items-center gap-2">
-              Monthly
-              <Info size={14} className="opacity-50" />
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-32 px-3 py-2 bg-slate-900 text-white text-[10px] rounded-xl text-center shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none font-black translate-y-2 group-hover:translate-y-0 duration-300">
-                Coming Soon
-                <div className="absolute top-full left-1/2 -translate-x-1/2 border-[6px] border-transparent border-t-slate-900"></div>
-              </div>
-            </div>
           </div>
         </MotionWrapper>
 
         {/* Pricing Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl w-full items-stretch">
-          {tiers.map((tier, idx) => (
-            <MotionWrapper
-              key={tier.name}
-              type="slideUp"
-              delay={0.4 + idx * 0.1}
-              className="h-full"
-            >
-              <div
-                className={`relative h-full flex flex-col p-8 rounded-[2.5rem] transition-all duration-500 hover:scale-[1.02] border
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full items-stretch">
+          {tiers.map((tier, idx) => {
+            /**
+             * SAVINGS CALCULATION ENGINE
+             * Strategy: Derive annual value from monthly string and compare with discounted yearly price.
+             * Logic:
+             * 1. Sanitize price strings (remove commas) to integers.
+             * 2. Compute theoretical annual cost at monthly rate.
+             * 3. Calculate absolute LKR savings.
+             * 4. Compute percentage savings for visual reinforcement.
+             */
+            const monthlyVal = parseInt(tier.monthlyPrice.replace(/,/g, ""));
+            const yearlyVal = parseInt(tier.yearlyPrice.replace(/,/g, ""));
+            const annualCostIfMonthly = monthlyVal * 12; // Base baseline for comparison.
+            const savings = annualCostIfMonthly - yearlyVal;
+            const savingsPercent = Math.round(
+              (savings / annualCostIfMonthly) * 100,
+            );
+
+            return (
+              <MotionWrapper
+                key={tier.name}
+                type="slideUp"
+                delay={0.4 + idx * 0.1}
+                className="h-full"
+              >
+                <div
+                  className={`relative h-full flex flex-col p-8 rounded-[2.5rem] transition-all duration-500 hover:scale-[1.02] border
                 ${
                   tier.highlight
                     ? "bg-slate-50 dark:bg-zinc-900 border-secondary/20 dark:border-secondary/40 shadow-2xl scale-105 z-10"
                     : "bg-white dark:bg-zinc-950 border-gray-200 dark:border-zinc-800 hover:shadow-xl"
                 }
               `}
-              >
-                {tier.mostPopular && (
-                  <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-3">
-                    <div className="bg-yellow-400 text-yellow-900 text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg uppercase tracking-widest border-2 border-white dark:border-zinc-800">
-                      Most Popular
+                >
+                  {tier.mostPopular && (
+                    <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-3">
+                      <div className="bg-yellow-400 text-yellow-900 text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg uppercase tracking-widest border-2 border-white dark:border-zinc-800">
+                        Most Popular
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="mb-6">
+                    <h3
+                      className={`text-xl font-black tracking-tight ${tier.highlight ? "text-secondary" : "text-slate-900 dark:text-white"}`}
+                    >
+                      {tier.name}
+                    </h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-3 font-medium min-h-[40px]">
+                      {tier.description}
+                    </p>
+                  </div>
+
+                  <div className="mb-8 p-6 rounded-3xl bg-white/50 dark:bg-black/20 border border-slate-100 dark:border-zinc-800 relative overflow-hidden">
+                    <div className="flex items-baseline relative z-10">
+                      {/* Currency Label */}
+                      <span className="text-sm font-black text-slate-400 dark:text-zinc-600 mr-1.5">
+                        LKR
+                      </span>
+
+                      {/* 
+                        PRICE TOGGLE LOGIC
+                        - Controls: billingCycle state.
+                        - Impact: Shifts display between monthly snippet and annual bulk price.
+                      */}
+                      <span
+                        className={`font-black tracking-tighter text-slate-900 dark:text-white ${tier.highlight ? "text-5xl" : "text-4xl"}`}
+                      >
+                        {billingCycle === "monthly"
+                          ? tier.monthlyPrice
+                          : tier.yearlyPrice}
+                      </span>
+
+                      {/* Interval Suffix */}
+                      <span className="ml-1 text-sm font-black text-slate-400 dark:text-zinc-600 uppercase tracking-wide">
+                        /{billingCycle === "monthly" ? "mo" : "yr"}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-1 mt-2">
+                      <p className="text-slate-400 dark:text-zinc-500 text-xs font-bold uppercase tracking-widest">
+                        per {billingCycle === "monthly" ? "month" : "year"}
+                      </p>
+
+                      {billingCycle === "yearly" && (
+                        <div className="inline-flex items-center gap-2 mt-1">
+                          <span className="px-2 py-1 rounded-md bg-green-100 text-green-700 text-[10px] font-black uppercase tracking-wide">
+                            Save {savingsPercent}%
+                          </span>
+                          <span className="text-[10px] font-bold text-slate-500">
+                            Save LKR {savings.toLocaleString()}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
-                )}
 
-                <div className="mb-6">
-                  <h3
-                    className={`text-xl font-black tracking-tight ${tier.highlight ? "text-secondary" : "text-slate-900 dark:text-white"}`}
-                  >
-                    {tier.name}
-                  </h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 mt-3 font-medium min-h-[40px]">
-                    {tier.description}
-                  </p>
-                </div>
-
-                <div className="mb-8 p-6 rounded-3xl bg-white/50 dark:bg-black/20 border border-slate-100 dark:border-zinc-800">
-                  <div className="flex items-baseline">
-                    <span className="text-sm font-black text-slate-400 dark:text-zinc-600 mr-1.5">
-                      LKR
-                    </span>
-                    <span
-                      className={`font-black tracking-tighter text-slate-900 dark:text-white ${tier.highlight ? "text-5xl" : "text-4xl"}`}
-                    >
-                      {tier.price}
-                    </span>
-                  </div>
-                  <p className="text-slate-400 dark:text-zinc-500 text-xs font-bold mt-1 uppercase tracking-widest">
-                    per year
-                  </p>
-                </div>
-
-                <Link
-                  className={`block w-full py-4 text-center font-black rounded-2xl transition-all duration-300 active:scale-[0.98] mb-8
+                  {/* 
+                    CTA ROUTING LOGIC
+                    - Strategy: Dynamic href based on plan tier.
+                    - Logic: 
+                      1. Standard plans go to self-serve registration.
+                      2. Enterprise plans require manual sales touchpoint (contact form).
+                  */}
+                  <Link
+                    className={`block w-full py-4 text-center font-black rounded-2xl transition-all duration-300 active:scale-[0.98] mb-8
                     ${
                       tier.highlight
                         ? "bg-secondary text-white shadow-xl shadow-secondary/20 hover:bg-secondary/90"
                         : "bg-transparent border-2 border-secondary/20 text-secondary hover:bg-secondary hover:text-white hover:border-secondary"
                     }
                   `}
-                  href={
-                    tier.name === "Vexel Enterprise"
-                      ? "/contact"
-                      : "/get-started"
-                  }
-                >
-                  {tier.cta}
-                </Link>
+                    href={
+                      tier.name === "Vexel Enterprise"
+                        ? "/contact"
+                        : "/register"
+                    }
+                  >
+                    {tier.cta}
+                  </Link>
 
-                <div className="space-y-6 flex-grow">
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                    What's included
-                  </p>
-                  <ul className="space-y-4">
-                    {tier.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2
-                          size={18}
-                          className="text-green-500 shrink-0 mt-0.5"
-                        />
-                        <span
-                          className={`text-sm leading-tight ${feature.includes("plus:") ? "font-black text-slate-400 dark:text-zinc-600" : "font-bold text-slate-700 dark:text-slate-300"}`}
-                        >
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="space-y-6 flex-grow">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                      What's included
+                    </p>
+                    <ul className="space-y-4">
+                      {tier.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <CheckCircle2
+                            size={18}
+                            className="text-green-500 shrink-0 mt-0.5"
+                          />
+                          <span
+                            className={`text-sm leading-tight ${feature.includes("plus:") ? "font-black text-slate-400 dark:text-zinc-600" : "font-bold text-slate-700 dark:text-slate-300"}`}
+                          >
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </MotionWrapper>
-          ))}
+              </MotionWrapper>
+            );
+          })}
         </div>
 
         {/* Trust Footer */}

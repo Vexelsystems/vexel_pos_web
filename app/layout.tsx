@@ -5,6 +5,7 @@ import { SoundToaster } from "@/components/SoundToaster";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { generatePageMetadata } from "@/lib/seo";
+import { AuthProvider } from "@/lib/auth-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,10 +34,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-zinc-950`}
       >
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-        <SoundToaster />
+        <AuthProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <SoundToaster />
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,6 +1,19 @@
 import { generatePageMetadata } from "@/lib/seo";
 import FeaturesClient from "./FeaturesClient";
 
+/**
+ * FEATURES ROOT PAGE
+ *
+ * Functional Overview:
+ * - Detailed showcase of the Vexel POS feature suite.
+ * - Dynamic Metadata: SEO-optimized for feature-specific searches (Inventory, Analytics, etc.).
+ * - Content: Wraps `FeaturesClient` for the animated feature deep-dive.
+ */
+
+/**
+ * METADATA GENERATION
+ * Targets high-intent keywords like "smart inventory" and "multi- management".
+ */
 export async function generateMetadata() {
   return await generatePageMetadata({
     title: "Powerful Features | Scalable POS Solutions",
@@ -11,7 +24,6 @@ export async function generateMetadata() {
       "smart inventory management Sri Lanka",
       "POS analytics dashboard",
       "offline point of sale",
-      "multi-branch business management",
       "SaaS POS features",
       "cloud business tools",
     ],
@@ -19,6 +31,10 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * FEATURES PAGE COMPONENT
+ * Renders the primary Features showcase.
+ */
 export default function FeaturesPage() {
   return <FeaturesClient />;
 }

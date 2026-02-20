@@ -1,6 +1,19 @@
 import { generatePageMetadata } from "@/lib/seo";
 import PricingClient from "./PricingClient";
 
+/**
+ * PRICING ROOT PAGE
+ *
+ * Functional Overview:
+ * - Public marketing page displaying subscription tiers and billing options.
+ * - Dynamic Metadata: Sets SEO attributes for the pricing page.
+ * - Components: Wraps `PricingClient` for interactive tier selection and toggles.
+ */
+
+/**
+ * METADATA GENERATION
+ * Optimized for keywords related to POS pricing in Sri Lanka.
+ */
 export async function generateMetadata() {
   return await generatePageMetadata({
     title: "Simple & Transparent Pricing",
@@ -18,6 +31,10 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * PRICING PAGE COMPONENT
+ * Returns the interactive PricingClient.
+ */
 export default function PricingPage() {
   return <PricingClient />;
 }

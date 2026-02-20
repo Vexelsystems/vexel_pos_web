@@ -106,12 +106,7 @@ export const faqData: FAQItem[] = [
     answer:
       "Yes, you can process sales quickly without requiring customer details, or quickly link one for loyalty points.",
   },
-  {
-    category: "pos-services",
-    question: "Can I see stock levels at other branches?",
-    answer:
-      "Yes, if you have multi-store sync enabled, you can check inventory levels across all locations in real-time.",
-  },
+
   {
     category: "pos-services",
     question: "Does the system support kitchen printing?",
@@ -203,12 +198,7 @@ export const faqData: FAQItem[] = [
     answer:
       "We offer a 7-day grace period for failed payments. After that, your access might be restricted until the balance is cleared.",
   },
-  {
-    category: "pricing",
-    question: "Do you offer a free trial?",
-    answer:
-      "Yes, we offer a 14-day full-featured free trial so you can test the system before committing.",
-  },
+
   {
     category: "pricing",
     question: "Is there a setup fee?",
@@ -1176,12 +1166,6 @@ export const faqData: FAQItem[] = [
   },
   {
     category: "inventory",
-    question: "Can I track inventory across multiple locations?",
-    answer:
-      "Yes, our multi-store module allows you to see and transfer stock between different branches.",
-  },
-  {
-    category: "inventory",
     question: "What is 'Composite Products' or 'Bundles'?",
     answer:
       "You can create a single product that subtracts multiple items from inventory when sold (e.g., a Gift Basket).",
@@ -1630,67 +1614,6 @@ export const faqData: FAQItem[] = [
       "Yes, for fast-moving environments, you can enable 'One-Tap Cash' for the most common denominations.",
   },
 
-  // --- MULTI-STORE SYNC (20) ---
-  {
-    category: "multi-store",
-    question: "Can I see sales for all my stores in one place?",
-    answer:
-      "Yes, the 'Global Dashboard' aggregates data from all locations into a single, real-time view.",
-  },
-  {
-    category: "multi-store",
-    question: "How do I transfer stock between stores?",
-    answer:
-      "Use the 'Stock Transfer' tool to create a manifest. Once the receiving branch 'Accepts' it, inventory levels update automatically.",
-  },
-  {
-    category: "multi-store",
-    question: "Can I have different prices for different locations?",
-    answer:
-      "Yes, you can set 'Location-based Pricing' for products if your costs or market demands vary by region.",
-  },
-  {
-    category: "multi-store",
-    question: "Are customer loyalty points shared across all stores?",
-    answer:
-      "Yes, a customer can earn points at Branch A and redeem them at Branch B seamlessly.",
-  },
-  {
-    category: "multi-store",
-    question: "Can I manage all my menus/products from one central office?",
-    answer:
-      "Absolutely. You can push menu updates to all locations or specific groups of stores instantly.",
-  },
-  {
-    category: "multi-store",
-    question: "What happens if one store's internet goes down?",
-    answer:
-      "That store will operate in 'Offline Mode' and sync its data once it's back online. Other stores are unaffected.",
-  },
-  {
-    category: "multi-store",
-    question: "Can I see 'Live Inventory' for other branches at the POS?",
-    answer:
-      "Yes, if a customer needs an item you're out of, you can instantly check if the nearby store has it.",
-  },
-  {
-    category: "multi-store",
-    question: "Can I restrict staff to only access their specific store?",
-    answer:
-      "Yes, users can be assigned to one, many, or all locations depending on their role.",
-  },
-  {
-    category: "multi-store",
-    question: "How do I compare performance between branches?",
-    answer:
-      "The 'Branch Comparison' report shows revenue, traffic, and profitability metrics side-by-side.",
-  },
-  {
-    category: "multi-store",
-    question: "Can I set different tax rules for different regions?",
-    answer:
-      "Yes, Vexel supports multiple tax profiles for businesses operating across different states or countries.",
-  },
   {
     category: "multi-store",
     question: "Does Vexel support Frenchizing or Master Accounts?",
@@ -1719,7 +1642,7 @@ export const faqData: FAQItem[] = [
     category: "multi-store",
     question: "Can I have different languages for different stores?",
     answer:
-      "Yes, the POS interface can be localized per branch (e.g., English in city stores, Sinhala in rural areas).",
+      "Yes, the POS interface can be localized (e.g., English in city stores, Sinhala in rural areas).",
   },
   {
     category: "multi-store",
@@ -1731,7 +1654,7 @@ export const faqData: FAQItem[] = [
     category: "multi-store",
     question: "Can I manage store-specific promotions?",
     answer:
-      "Yes, you can create 'Location-specific Discounts' that are only valid at specific branches.",
+      "Yes, you can create 'Location-specific Discounts' that are only valid at specific locations.",
   },
   {
     category: "multi-store",
@@ -1743,7 +1666,7 @@ export const faqData: FAQItem[] = [
     category: "multi-store",
     question: "Can I see who is currently logged in at each store?",
     answer:
-      "Yes, the 'Live Attendance' dashboard shows the active staff members for every branch.",
+      "Yes, the 'Live Attendance' dashboard shows the active staff members.",
   },
   {
     category: "multi-store",
