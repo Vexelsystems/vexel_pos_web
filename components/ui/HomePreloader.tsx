@@ -10,6 +10,15 @@ export default function HomePreloader() {
 
   useEffect(() => {
     // Prevent scrolling while loading
+    /**
+     * PRELOADER PERFORMANCE LOGIC
+     * Strategy: Progressive progress simulation + scroll-lock.
+     * Logic:
+     * 1. Locks 'body.overflow' to prevent premature user interaction while assets hydrate.
+     * 2. 'duration' (1200ms) governs the perceived speed.
+     * 3. 'setInterval' increments progress incrementally to avoid jarring jumps.
+     * 4. 'timeout' ensures a clean exit (wait 200ms after 100%) before disabling the preloader.
+     */
     if (isLoading) {
       document.body.style.overflow = "hidden";
     } else {

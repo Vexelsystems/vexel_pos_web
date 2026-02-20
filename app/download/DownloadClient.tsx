@@ -102,7 +102,10 @@ export default function DownloadClient() {
               );
             })}
 
-            {/* Android Card (Coming Soon) */}
+            {/* Android Card (Coming Soon)
+               Strategy: Intent capture for future products.
+               Logic: Displayed as disabled/lock-state to manage user expectations.
+            */}
             <MotionWrapper
               type="slideUp"
               delay={0.2}
@@ -148,6 +151,11 @@ export default function DownloadClient() {
               className="lg:col-span-2 bg-white dark:bg-zinc-900 rounded-[2.5rem] border border-slate-100 dark:border-zinc-800 p-10 shadow-sm"
             >
               <h4 className="text-2xl font-black text-slate-900 dark:text-white mb-10 flex items-center gap-4 tracking-tight">
+                {/* 
+                   SYSTEM REQUIREMENTS ENGINE
+                   Strategy: Comparative data display.
+                   Logic: Contrast 'Minimum' vs 'Recommended' to push users toward optimal hardware.
+                */}
                 <div className="p-2 bg-primary/10 rounded-xl text-primary">
                   <Database size={24} />
                 </div>

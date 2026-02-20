@@ -80,6 +80,13 @@ const industries = [
 ];
 
 export default function PlatformClient() {
+  /**
+   * INDUSTRY TAB ENGINE
+   * Strategy: Dynamic component switching based on active ID.
+   * Logic:
+   * 1. Track 'activeTab' matching industry.id.
+   * 2. Renders specialized sub-sections (Automotive, FnB, etc.) to keep the main component manageable.
+   */
   const [activeTab, setActiveTab] = useState("automotive");
 
   return (

@@ -1,6 +1,14 @@
 import { generatePageMetadata } from "@/lib/seo";
 import PlatformClient from "./PlatformClient";
 
+/**
+ * METADATA GENERATION
+ * Strategy: SEO injection via helper library.
+ * Logic:
+ * 1. Define page-specific title and meta description.
+ * 2. Targeted keywords for Sri Lankan retail/business segment.
+ * 3. Define canonical path for search engine indexing.
+ */
 export async function generateMetadata() {
   return await generatePageMetadata({
     title: "Industry Specific POS Solutions | Vexel Platform",

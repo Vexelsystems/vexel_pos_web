@@ -20,6 +20,14 @@ export default function ScrollNavButtons() {
       const documentHeight = document.documentElement.scrollHeight;
 
       // Check if at top (within 50px of top)
+      /**
+       * SCROLL THRESHOLD DETECTION
+       * Strategy: Coordinate-based visibility.
+       * Logic:
+       * 1. 'isAtTop': Hides the "Up" button when already near the header (50px buffer).
+       * 2. 'isAtBottom': Hides the "Down" button when near the footer (100px buffer).
+       * 3. 'isVisible': Ensures buttons only appear on pages long enough to require scrolling.
+       */
       setIsAtTop(scrollY < 50);
 
       // Check if at bottom (within 100px of bottom)

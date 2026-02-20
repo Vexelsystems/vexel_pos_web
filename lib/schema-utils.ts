@@ -57,6 +57,14 @@ export function generateSoftwareApplicationSchema({
   screenshot?: string;
   url: string;
 }) {
+  /**
+   * BASE SCHEMA LOGIC
+   * Strategy: Map core product metadata to schema.org SoftwareApplication specification.
+   * Logic:
+   * 1. Define @context and @type for search crawler identification.
+   * 2. Inject environment-specific BASE_URL for absolute canonical links.
+   * 3. Attach Organization metadata from companyDetails for authority verification.
+   */
   const schema: any = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -140,6 +148,13 @@ export function generateLocalProductSchema({
   availability?: string;
   regions?: string[];
 }) {
+  /**
+   * LOCAL PRODUCT SCHEMA LOGIC
+   * Purpose: Regional dominance in search engine result pages (SERPs).
+   * Logic:
+   * 1. Maps an array of Sri Lankan cities to 'areaServed' nodes.
+   * 2. This signals to Google that the product has specific relevance in those geographic clusters.
+   */
   return {
     "@context": "https://schema.org",
     "@type": "Product",

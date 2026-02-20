@@ -30,6 +30,14 @@ import { useState } from "react";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   // State for mobile accordion sections (null = all closed)
+  /**
+   * MOBILE ACCORDION LOGIC
+   * Strategy: Toggle-based state management.
+   * Logic:
+   * 1. track 'openSection' by ID/Title.
+   * 2. If clicking the already open section, close it (toggle).
+   * 3. Prevents multiple sections from cluttering the mobile viewport.
+   */
   const [openSection, setOpenSection] = useState<string | null>(null);
 
   const toggleSection = (section: string) => {
@@ -37,6 +45,13 @@ export default function Footer() {
   };
 
   // Reusable sub-component handling responsive logic (Mobile: Accordion / Desktop: Block)
+  /**
+   * FOOTER SECTION COMPONENT
+   * Strategy: Hybrid CSS layout (flex/grid) + state-driven visibility.
+   * Logic:
+   * - Mobile: Renders as a triggerable button that toggles children visibility.
+   * - Desktop: Uses 'lg:block' to override hidden state, displaying as a standard column.
+   */
   const FooterSection = ({
     title,
     children,
@@ -376,6 +391,13 @@ export default function Footer() {
                 </a>
 
                 <a
+                  /**
+                   * WHATSAPP INTEGRATION LOGIC
+                   * Strategy: Deep-link URL construction.
+                   * Logic:
+                   * 1. Remove '+' from phone number for the URL scheme.
+                   * 2. URI-encode the pre-filled message for browser compatibility.
+                   */
                   href={`https://wa.me/${companyDetails.contact.whatsapp.replace("+", "")}?text=${encodeURIComponent("Hi! I'm interested in discussing a project with Vexel Systems. Could you please help me get started?")}`}
                   target="_blank"
                   rel="noopener noreferrer"

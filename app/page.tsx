@@ -1,6 +1,21 @@
 import { generatePageMetadata } from "@/lib/seo";
 import LandingClient from "./LandingClient";
 
+/**
+ * ROOT LANDING PAGE
+ *
+ * Functional Overview:
+ * - Serves as the primary entry point for the Vexel POS platform.
+ * - Dynamic Metadata: Generates SEO-optimized titles and descriptions for search engines.
+ * - Implementation: Wraps `LandingClient` which contains the visual hero, features, and CTA sections.
+ *
+ * Server-side logic handles SEO before delivering the client component.
+ */
+
+/**
+ * METADATA GENERATION
+ * Constructs the SEO profile for the homepage.
+ */
 export async function generateMetadata() {
   return await generatePageMetadata({
     title: "Vexel POS - All-in-One Cloud Point of Sale System",
@@ -20,6 +35,10 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * HOME COMPONENT
+ * Returns the LandingClient for the modular landing page experience.
+ */
 export default function Home() {
   return <LandingClient />;
 }

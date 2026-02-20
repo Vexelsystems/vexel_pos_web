@@ -29,6 +29,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { companyDetails } from "@/lib/companydetails";
 
+/**
+ * LANDING CLIENT COMPONENT
+ *
+ * Functional Overview:
+ * - Implements a high-conversion SaaS landing page.
+ * - Sections Included: Hero (Value Prop), Metrics (Social Proof), Video (Product Demo),
+ *   Platform Support (Multi-device), Feature Grid (Functional depth),
+ *   Industry Solutions (Vertical focus), and Testimonials.
+ * - UI/UX: Uses `MotionWrapper` for entrance animations and standardizes on the Vexel design system.
+ */
 export default function LandingClient() {
   return (
     <div className="bg-white dark:bg-zinc-950 font-sans text-slate-800 dark:text-slate-200 antialiased selection:bg-primary/20">
@@ -41,6 +51,11 @@ export default function LandingClient() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <MotionWrapper type="slideUp">
+            {/* 
+              NEW FEATURE BADGE LOGIC
+              - Visual Strategy: Pulsing animation to draw attention.
+              - Logic: Purely presentation, but used as a hook for marketing recent updates.
+            */}
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black mb-10 uppercase tracking-[0.2em] shadow-inner">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -64,10 +79,16 @@ export default function LandingClient() {
               real-time, and grow effortlessly.
             </p>
 
+            {/* 
+              CTA LOGIC
+              - Primary: Link to registration flow (`/register`).
+              - Secondary: Link to demo request (`/demo`).
+              - Logic: Tracking high-intent user paths.
+            */}
             <div className="flex flex-col sm:flex-row justify-center gap-6 mb-20 items-center">
               <Link
                 className="bg-primary hover:bg-primary/90 text-white px-10 py-5 rounded-[2.5rem] text-xl font-black transition-all shadow-2xl shadow-primary/30 transform hover:scale-105 active:scale-95 flex items-center gap-2"
-                href="/get-started"
+                href="/register"
               >
                 Get Started Free <ArrowUpRight size={24} />
               </Link>
@@ -80,7 +101,11 @@ export default function LandingClient() {
             </div>
           </MotionWrapper>
 
-          {/* Metrics */}
+          {/* 
+            METRICS LOGIC (SOCIAL PROOF)
+            - Purpose: Establish reliability and scale.
+            - Logic: Display hard stats that map to business KPIs.
+          */}
           <MotionWrapper
             type="slideUp"
             delay={0.4}
@@ -166,6 +191,11 @@ export default function LandingClient() {
               </ul>
             </MotionWrapper>
 
+            {/* 
+              DEMO VIDEO LOGIC
+              - Strategy: Interactive thumbnail with hover effects.
+              - Logic: Placeholder for video player integration.
+            */}
             <MotionWrapper
               type="slideLeft"
               className="order-1 lg:order-2 relative group cursor-pointer"
@@ -212,6 +242,11 @@ export default function LandingClient() {
             </p>
           </div>
 
+          {/* 
+            PLATFORM GRID LOGIC
+            - Data Structure: Array of platform objects containing metadata (OS, description, status).
+            - UI Logic: Map through array to generate cards with accessibility-aware labels.
+          */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -343,6 +378,11 @@ export default function LandingClient() {
           <h2 className="text-4xl lg:text-6xl font-black text-slate-900 dark:text-white mb-20 text-center tracking-tighter">
             Industry-Specific <span className="text-primary italic">Power</span>
           </h2>
+          {/* 
+            INDUSTRY SOLUTIONS LOGIC
+            - Strategy: Vertical-specific sub-pages (implied).
+            - Logic: Mock metrics (e.g., '60%') shown via inline-style progress bars to indicate market penetration or relevance.
+          */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
@@ -487,15 +527,15 @@ export default function LandingClient() {
               </h2>
               <p className="text-2xl text-white/70 font-bold mb-16 max-w-3xl mx-auto leading-relaxed">
                 Join 500+ businesses across Sri Lanka growing with Vexel POS.
-                Start your 14-day free trial today.
+                Start your Vexel journey today.
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-6 items-center">
                 <Link
                   className="bg-white text-primary hover:bg-slate-50 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all shadow-2xl transform hover:scale-105 active:scale-95"
-                  href="/get-started"
+                  href="/register"
                 >
-                  Start Free Trial
+                  Get Started
                 </Link>
                 <Link
                   className="bg-transparent border-2 border-white/30 text-white hover:bg-white/10 px-12 py-6 rounded-[2.5rem] text-2xl font-black transition-all backdrop-blur-md transform hover:scale-105 active:scale-95"

@@ -18,6 +18,14 @@ export function HeroBackground() {
       const x = (e.clientX - left) / width;
       const y = (e.clientY - top) / height;
 
+      /**
+       * MOUSE-COORDINATE ENGINE
+       * Strategy: CSS Variable synchronization.
+       * Logic:
+       * 1. Calculates relative X/Y % within the container.
+       * 2. Sets '--mouse-x' and '--mouse-y' on the DOM element.
+       * 3. Bypasses React state (no re-renders) for 60fps performance during high-frequency mouse moves.
+       */
       container.style.setProperty("--mouse-x", x.toString());
       container.style.setProperty("--mouse-y", y.toString());
     };
@@ -51,7 +59,6 @@ export function HeroBackground() {
           `,
         }}
       />
-      
     </div>
   );
 }

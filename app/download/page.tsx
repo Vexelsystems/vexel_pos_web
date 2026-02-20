@@ -1,6 +1,11 @@
 import { generatePageMetadata } from "@/lib/seo";
 import DownloadClient from "./DownloadClient";
 
+/**
+ * METADATA GENERATION
+ * Strategy: Accessibility-focused SEO (Software Downloads).
+ * Logic: Targets searches for desktop/mobile business applications.
+ */
 export async function generateMetadata() {
   return await generatePageMetadata({
     title: "Download Vexel Systems POS | Apps for All Devices",

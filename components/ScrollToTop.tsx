@@ -14,6 +14,14 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     // Start transition
+    /**
+     * ROUTE CHANGE SYNCHRONIZATION
+     * Strategy: Imperative scroll + Declarative transition.
+     * Logic:
+     * 1. Triggered on 'pathname' change.
+     * 2. 'window.scrollTo(0, 0)' resets the viewport for the new page.
+     * 3. 'isTransitioning' triggers a 300ms overlay/animation to hide the content jump.
+     */
     setIsTransitioning(true);
 
     // Scroll to top instantly

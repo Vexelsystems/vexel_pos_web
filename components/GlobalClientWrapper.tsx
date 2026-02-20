@@ -30,6 +30,14 @@ export default function GlobalClientWrapper({
   useEffect(() => {
     // Defer loading widgets until after page is interactive
     // This reduces Total Blocking Time significantly
+    /**
+     * COMPONENT DEFERRAL ENGINE
+     * Strategy: Time-based lazy mounting.
+     * Logic:
+     * 1. Next.js dynamic() handles the chunk loading.
+     * 2. This hook delays the actual 'mounting' by 3 seconds.
+     * 3. Prioritizes the Hero/Main content rendering over background widgets (LiveChat, Cookies).
+     */
     const timer = setTimeout(() => {
       setShowWidgets(true);
     }, 3000); // 3 second delay

@@ -6,7 +6,14 @@
  * - Logic: Auto-generates Service links dynamically from `services.ts`.
  * - formatSlug: Helper to beautify URL slugs for display.dfdfsas
  */
-// Helper to format slug to title (e.g., "web-development" -> "Web Development")
+/**
+ * formatSlug (String Transformation Logic)
+ * Purpose: Converts machine-readable slugs into human-friendly titles.
+ * Logic:
+ * 1. Split by hyphen.
+ * 2. Map through tokens and capitalize the first index.
+ * 3. Join with spaces.
+ */
 const formatSlug = (slug: string) => {
   return slug
     .split("-")

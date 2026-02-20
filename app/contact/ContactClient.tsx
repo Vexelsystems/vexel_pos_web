@@ -34,7 +34,7 @@ export default function Contact() {
   return (
     <main className="min-h-screen bg-white text-foreground antialiased">
       {/* Page Heading */}
-      <section className="bg-white py-12 lg:py-20 border-b border-gray-100 dark:border-zinc-800">
+      <section className="bg-white pt-32 pb-12 lg:pt-40 lg:pb-20 border-b border-gray-100 dark:border-zinc-800">
         <div className="container w-[90%] md:w-[80%] mx-auto max-w-[1920px]">
           <MotionWrapper type="slideUp" duration={0.8}>
             <h1 className="text-foreground text-4xl lg:text-5xl font-black leading-tight tracking-[-0.033em] mb-4">
@@ -178,12 +178,24 @@ export default function Contact() {
 
                 <form
                   className="space-y-6"
+                  /**
+                   * FORM SUBMISSION LOGIC
+                   * Strategy: Client-side event handling for immediate feedback.
+                   * Logic:
+                   * 1. Prevent default browser reload behavior.
+                   * 2. Trigger the global Toast notification engine with customized success metadata.
+                   * 3. Clear the DOM input states to prepare for the next inquiry.
+                   */
                   onSubmit={(e) => {
-                    e.preventDefault();
+                    e.preventDefault(); // Logic: Hijack the form lifecycle for async-like UX.
+
+                    // Logic: Visual Confirmation flow.
                     showSuccess(
                       "Message sent successfully!",
                       "Thank you for reaching out. We will get back to you shortly.",
                     );
+
+                    // Logic: State Reset.
                     (e.target as HTMLFormElement).reset();
                   }}
                 >

@@ -1,12 +1,21 @@
 import { toast } from "sonner";
 
+/**
+ * playSound (Audio Feedback Logic)
+ * Strategy: Low-latency DOM Audio API.
+ * Logic:
+ * 1. Instantiate a new Audio object with the target asset path.
+ * 2. Attempt playback.
+ * 3. Catch 'NotAllowedError' specially—this happens if the user hasn't interacted with the page yet
+ *    (browser security policy preventing auto-playing sounds).
+ */
 export const playSound = (type: "success" | "error" | "info") => {
   try {
     const audio = new Audio(
       type === "error" ? "/sounds/error.mp3" : "/sounds/notification.wav",
     );
     audio.play().catch((e) => {
-      // Browsers often block autoplay until user interaction
+      // Logic: Silently handle expected browser autoplay blocks.
       if (e.name !== "NotAllowedError" && e.name !== "NotSupportedError") {
         console.error("Error playing audio:", e);
       }
@@ -16,6 +25,10 @@ export const playSound = (type: "success" | "error" | "info") => {
   }
 };
 
+/**
+ * showSuccess (User Feedback Orchestration)
+ * Logic: Combines audio cues with a persistent Sonner toast notification.
+ */
 export const showSuccess = (message: string, description?: string) => {
   playSound("success");
   toast.success(message, {

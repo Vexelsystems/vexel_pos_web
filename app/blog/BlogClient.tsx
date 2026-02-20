@@ -80,12 +80,17 @@ const articles = [
 ];
 
 export default function BlogClient() {
+  /**
+   * CATEGORY STATE LOGIC
+   * Strategy: Local state for filtering.
+   * Logic: 'All' shows everything, while specific strings (e.g., 'Retail') filter the displayed list.
+   */
   const [activeCategory, setActiveCategory] = useState("All");
 
   return (
     <div className="bg-background-light dark:bg-background-dark font-sans text-slate-900 antialiased min-h-screen flex flex-col transition-colors duration-200 selection:bg-primary/20">
       {/* Header Section */}
-      <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800 pt-20 pb-16">
+      <header className="bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800 pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <MotionWrapper type="slideUp">
             <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
@@ -119,6 +124,10 @@ export default function BlogClient() {
               </div>
               <div className="md:w-1/3 p-10 flex flex-col justify-center bg-slate-50 dark:bg-slate-900/50">
                 <div className="flex items-center gap-3 mb-6">
+                  {/* FEATURED BADGE LOGIC
+                      Strategy: Visual hierarchy.
+                      Logic: Uses primary brand color to distinguish the top story.
+                  */}
                   <span className="px-3 py-1 rounded-full text-[10px] font-black bg-primary text-white uppercase tracking-widest shadow-lg shadow-primary/20">
                     Featured
                   </span>

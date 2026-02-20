@@ -38,6 +38,14 @@ const faqs = [
 ];
 
 export default function FaqClient() {
+  /**
+   * ACCORDION STATE MACHINE
+   * Strategy: Index-based toggle.
+   * Logic:
+   * 1. track 'openIndex' (number | null).
+   * 2. If clicking already open, set to null (close all).
+   * 3. Defaults to 0 (first item open) to encourage interaction.
+   */
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (

@@ -72,6 +72,15 @@ export default function ConsultationClient() {
     const steps = duration / intervalTime;
     const increment = 100 / steps;
 
+    /**
+     * SUBMISSION & PROGRESS LOGIC
+     * Strategy: Time-based state simulation (UX improvement).
+     * Logic:
+     * 1. Check for Contact Info (Email OR Phone).
+     * 2. Initialize 1500ms timer with 30ms ticks.
+     * 3. Increment 'progress' state toward 100% to simulate backend "negotiation".
+     * 4. Trigger localized success sound on completion.
+     */
     const timer = setInterval(() => {
       setProgress((prev) => {
         const next = prev + increment;

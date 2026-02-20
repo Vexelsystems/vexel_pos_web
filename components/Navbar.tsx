@@ -3,8 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, User, LogOut } from "lucide-react";
 import { companyDetails } from "@/lib/companydetails";
+import { useAuth } from "@/lib/auth-context";
 
 const navLinks = [
   { name: "Platform", href: "/#solutions" },
@@ -16,6 +17,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const { user, logout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -32,7 +34,7 @@ export default function Navbar() {
     <nav
       className={`fixed w-full z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-b border-slate-100 dark:border-zinc-900 py-4"
+          ? "bg-background/80 backdrop-blur-xl border-b border-white/10 py-4"
           : "bg-transparent py-6"
       }`}
     >
@@ -49,7 +51,7 @@ export default function Navbar() {
                 sizes="40px"
               />
             </div>
-            <span className="font-black text-2xl tracking-tighter text-slate-900 dark:text-white">
+            <span className="font-black text-2xl tracking-tighter text-foreground">
               Vexel <span className="text-secondary italic">POS</span>
             </span>
           </Link>
@@ -57,72 +59,54 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-2">
             {navLinks.map((link) => (
-              <div
-                key={link.name}
-                onMouseEnter={() =>
-                  (link as any).dropdown && setActiveDropdown(link.name)
-                }
-                onMouseLeave={() => setActiveDropdown(null)}
-                className="relative"
-              >
+              <div key={link.name} className="relative">
                 <Link
                   href={link.href}
-                  className={`px-4 py-2 text-xs font-black uppercase tracking-widest transition-all flex items-center gap-1.5 ${
-                    activeDropdown === link.name
-                      ? "text-secondary"
-                      : "text-slate-500 hover:text-secondary dark:text-zinc-400 dark:hover:text-secondary"
-                  }`}
+                  className="px-4 py-2 text-xs font-black uppercase tracking-widest text-foreground/60 hover:text-secondary transition-all"
                 >
                   {link.name}
-                  {(link as any).dropdown && (
-                    <ChevronDown
-                      size={14}
-                      className={`transition-transform duration-300 ${activeDropdown === link.name ? "rotate-180" : ""}`}
-                    />
-                  )}
                 </Link>
-
-                {/* Dropdown Menu */}
-                {(link as any).dropdown && activeDropdown === link.name && (
-                  <div className="absolute top-full left-0 w-64 pt-4">
-                    <div className="bg-white dark:bg-zinc-900 rounded-[2rem] p-4 shadow-2xl border border-slate-100 dark:border-zinc-800 backdrop-blur-xl">
-                      <div className="grid gap-2">
-                        {(link as any).dropdown.map((item: any) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            className="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-zinc-800 transition-all group"
-                          >
-                            <div className="w-10 h-10 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all">
-                              <item.icon size={18} />
-                            </div>
-                            <span className="text-sm font-black text-slate-900 dark:text-white">
-                              {item.name}
-                            </span>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
             ))}
           </div>
 
           {/* Auth/CTA */}
           <div className="hidden lg:flex items-center gap-6">
-            <Link
-              href="/login"
-              className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-secondary transition-colors"
-            >
-              Log In
-            </Link>
-            <Link
-              href="/get-started"
-              className="bg-secondary hover:bg-secondary/95 text-white px-8 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-xl shadow-secondary/20 active:scale-95 whitespace-nowrap"
-            >
-              Start Free Trial
-            </Link>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/dashboard"
+                  className="text-xs font-black uppercase tracking-widest text-foreground/60 hover:text-secondary transition-colors flex items-center gap-2"
+                >
+                  <div className="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold">
+                    {user.firstName?.[0] || user.email?.[0].toUpperCase()}
+                  </div>
+                  Dashboard
+                </Link>
+                <button
+                  onClick={() => logout()}
+                  className="bg-red-500/10 text-red-500 px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all active:scale-95 flex items-center gap-2"
+                >
+                  <LogOut size={14} />
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-xs font-black uppercase tracking-widest text-foreground/40 hover:text-secondary transition-colors"
+                >
+                  Log In
+                </Link>
+                <Link
+                  href="/register"
+                  className="bg-secondary hover:bg-secondary/95 text-white px-8 py-3.5 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-xl shadow-secondary/20 active:scale-95 whitespace-nowrap"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Toggle */}
@@ -137,47 +121,56 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-white dark:bg-zinc-950 border-b border-slate-100 dark:border-zinc-900 p-6 animate-in slide-in-from-top duration-300">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-inner-box border-b border-white/10 p-6 animate-in slide-in-from-top duration-300">
           <div className="grid gap-6">
             {navLinks.map((link) => (
-              <div key={link.name}>
-                <Link
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-xl font-black text-slate-900 dark:text-white flex justify-between items-center hover:text-secondary"
-                >
-                  {link.name}
-                  {(link as any).dropdown && <ChevronDown size={20} />}
-                </Link>
-                {(link as any).dropdown && (
-                  <div className="mt-4 ml-4 grid gap-4 border-l-2 border-slate-100 dark:border-zinc-900 pl-4">
-                    {(link as any).dropdown.map((item: any) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="text-sm font-bold text-slate-500 dark:text-zinc-400 hover:text-secondary"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-xl font-black text-foreground hover:text-secondary"
+              >
+                {link.name}
+              </Link>
             ))}
-            <hr className="border-slate-100 dark:border-zinc-900" />
-            <Link
-              href="/login"
-              className="text-center font-black uppercase tracking-widest text-slate-400 hover:text-secondary"
-            >
-              Log In
-            </Link>
-            <Link
-              href="/get-started"
-              className="bg-secondary text-white p-5 rounded-2xl text-center font-black uppercase tracking-widest shadow-xl shadow-secondary/20"
-            >
-              Start Free Trial
-            </Link>
+            <hr className="border-white/10" />
+            {user ? (
+              <div className="grid gap-4">
+                <Link
+                  href="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 text-xl font-black text-foreground"
+                >
+                  <User size={20} /> Dashboard
+                </Link>
+                <button
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-3 bg-red-500 text-white p-5 rounded-2xl font-black uppercase tracking-widest"
+                >
+                  <LogOut size={20} /> Sign Out
+                </button>
+              </div>
+            ) : (
+              <div className="grid gap-4">
+                <Link
+                  href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-center font-black uppercase tracking-widest text-foreground/40 hover:text-secondary"
+                >
+                  Log In
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="bg-secondary text-white p-5 rounded-2xl text-center font-black uppercase tracking-widest shadow-xl shadow-secondary/20"
+                >
+                  Get Started
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}
