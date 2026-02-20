@@ -54,7 +54,7 @@ export const sriLankaData = {
             { id: 16, name: "Beruwala", postcode: "12070" },
             { id: 17, name: "Panadura", postcode: "12500" },
             { id: 18, name: "Horana", postcode: "12400" },
-            { id: 19, "name": "Bandaragama", postcode: "12530" },
+            { id: 19, name: "Bandaragama", postcode: "12530" },
             { id: 20, name: "Matugama", postcode: "12100" },
           ],
         },
@@ -174,7 +174,7 @@ export const sriLankaData = {
           id: 11,
           name: "Kilinochchi",
           name_si: "කිලිනොච්චිය",
-          name_ta": "கிளிநொச்சி",
+          name_ta: "கிளிநொச்சி",
           cities: [
             { id: 53, name: "Kilinochchi", postcode: "44000" },
             { id: 54, name: "Paranthan", postcode: "44000" },
@@ -281,10 +281,10 @@ export const sriLankaData = {
           name_si: "පුත්තලම",
           name_ta: "புத்தளம்",
           cities: [
-            { id: 78, "name": "Puttalam", postcode: "61300" },
+            { id: 78, name: "Puttalam", postcode: "61300" },
             { id: 79, name: "Chilaw", postcode: "61000" },
             { id: 80, name: "Wennappuwa", postcode: "61170" },
-            { id: 81, "name": "Maho", postcode: "60600" },
+            { id: 81, name: "Maho", postcode: "60600" },
           ],
         },
       ],
@@ -301,7 +301,7 @@ export const sriLankaData = {
           name_si: "අනුරාධපුර",
           name_ta: "அனுராதபுரம்",
           cities: [
-            { id: 82, "name": "Anuradhapura", postcode: "50000" },
+            { id: 82, name: "Anuradhapura", postcode: "50000" },
             { id: 83, name: "Mihintale", postcode: "50300" },
             { id: 84, name: "Kekirawa", postcode: "50100" },
             { id: 85, name: "Eppawala", postcode: "50200" },
@@ -362,7 +362,7 @@ export const sriLankaData = {
         {
           id: 24,
           name: "Ratnapura",
-          name_si": "රත්නපුර",
+          name_si: "රත්නපුර",
           name_ta: "இரத்தினபுரி",
           cities: [
             { id: 98, name: "Ratnapura", postcode: "70000" },
@@ -374,7 +374,7 @@ export const sriLankaData = {
         {
           id: 25,
           name: "Kegalle",
-          name_si": "කෑගල්ල",
+          name_si: "කෑගල්ල",
           name_ta: "கேகாலை",
           cities: [
             { id: 102, name: "Kegalle", postcode: "71000" },

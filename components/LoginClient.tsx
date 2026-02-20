@@ -91,14 +91,9 @@ export default function LoginClient() {
       clearInterval(timer); // Stop the progress simulation
       setProgress(100); // Snap bar to 100%
 
-      // Logic check: If user has no shop, Redirect to onboarding
-      if (!loginResult.user.currentShopId) {
-        toast.success("Login successful! Redirecting to setup...");
-        router.push("/onboarding");
-      } else {
-        toast.success("Login successful! Redirecting...");
-        router.push("/dashboard");
-      }
+      // Redirect to login — which will forward to the right place
+      toast.success("Login successful!");
+      router.push("/login");
     } catch (error: any) {
       // ERROR CLEANUP BLOCK: Reset UI to allow retry
       clearInterval(timer); // Stop the progress simulation
@@ -133,15 +128,8 @@ export default function LoginClient() {
     <main className="min-h-screen flex items-center justify-center p-4 pt-24 relative overflow-hidden">
       {/* Full Screen Loading Overlay */}
       {isLoading && (
-        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background/60 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="flex flex-col items-center gap-8">
-            <Loader className="scale-[2.5]" />
-            <div className="flex flex-col items-center gap-2">
-              <h3 className="text-2xl font-black text-primary tracking-tighter animate-pulse uppercase">
-                Authenticating...
-              </h3>
-            </div>
-          </div>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/60 backdrop-blur-md animate-in fade-in duration-300">
+          <Loader className="scale-[2.5]" />
         </div>
       )}
       {/* 

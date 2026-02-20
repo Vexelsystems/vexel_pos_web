@@ -240,19 +240,10 @@ export function DashboardClient() {
 
   return (
     <div className="min-h-screen bg-background p-6 pt-32 md:p-12 md:pt-32">
-      {/* Full Screen Loading Overlay */}
-      {(saving || verifyingOtp || verifyingPhone || requestingPhoneOtp) && (
-        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background/60 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="flex flex-col items-center gap-8">
-            <Loader className="scale-[2.5]" />
-            <div className="flex flex-col items-center gap-2">
-              <h3 className="text-2xl font-black text-primary tracking-tighter animate-pulse uppercase">
-                {verifyingOtp || verifyingPhone
-                  ? "Verifying..."
-                  : "Processing..."}
-              </h3>
-            </div>
-          </div>
+      {/* Full Screen Loading Overlay — only for save/email-verify operations */}
+      {saving && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/60 backdrop-blur-md animate-in fade-in duration-300">
+          <Loader className="scale-[2.5]" />
         </div>
       )}
       <div className="max-w-4xl mx-auto space-y-8">

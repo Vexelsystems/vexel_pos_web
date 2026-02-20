@@ -236,15 +236,8 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 font-display overflow-hidden relative selection:bg-primary/10">
       {/* Full Screen Loading Overlay */}
       {isSubmitting && (
-        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background/60 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="flex flex-col items-center gap-8">
-            <Loader className="scale-[2.5]" />
-            <div className="flex flex-col items-center gap-2">
-              <h3 className="text-2xl font-black text-primary tracking-tighter animate-pulse uppercase">
-                Sending Code...
-              </h3>
-            </div>
-          </div>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/60 backdrop-blur-md animate-in fade-in duration-300">
+          <Loader className="scale-[2.5]" />
         </div>
       )}
       {/* Background Decor */}
